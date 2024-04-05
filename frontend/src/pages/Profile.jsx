@@ -73,24 +73,26 @@ const Profile = () => {
     }
     setLoading(true);
 
-    // const headers = {
-    //   "Content-Type": "application/json",
-    //   Authorization: `Bearer ${window.localStorage.getItem("token")}`,
-    // };
-    // try {
-    //   const results = await axios.post(
-    //     "http://localhost:8000/update-profile",
-    //     {
-    //       firstName,
-    //       lastName,
-    //     },
-    //     { headers }
-    //   );
-
-    //   console.log(results);
-    // } catch (err) {
-    //   console.log(err);
-    // }
+    const headers = {
+      "Content-Type": "application/json",
+      authorization: `Bearer ${window.localStorage.getItem("token")}`,
+    };
+    try {
+      const result = await axios.post(
+        `http://localhost:8000/api/v1/profile?username=${window.localStorage.getItem(
+          "username"
+        )}&role=${window.localStorage.getItem("role")}`,
+        {
+          firstname: firstName,
+          lastname: lastName,
+        },
+        {
+          headers,
+        }
+      );
+    } catch (err) {
+      console.log("Error -> ", err);
+    }
     setLoading(false);
   };
 
@@ -109,8 +111,8 @@ const Profile = () => {
         }
       );
       const user = result.data;
-      setFirstName(user.firstname);
-      setLastName(user.lastname);
+      setFirstName(user.firstname === null ? "" : user.firstname);
+      setLastName(user.lastname === null ? "" : user.lastname);
       setUserName(user.username);
       setEmail(user.emailid);
       setRole(user.role);
@@ -216,7 +218,7 @@ const Profile = () => {
                     <Grid item xs={10} style={{ marginTop: "1em" }}>
                       <TextField
                         id="standard-helperText-1"
-                        label="First Name"
+                        label="Last Name"
                         value={lastName}
                         onChange={(e) => {
                           setLastName(e.target.value);
