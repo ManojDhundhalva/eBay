@@ -4,7 +4,7 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../CSS/AboutUs.css";
-
+import { useAuth } from "../context/auth";
 function AboutUS() {
   const theme = createTheme({
     typography: {
@@ -15,6 +15,12 @@ function AboutUS() {
       },
     },
   });
+
+  const { validateUser } = useAuth();
+
+  useEffect(() => {
+    validateUser();
+  }, []);
 
   useEffect(() => {
     AOS.init({
@@ -38,8 +44,8 @@ function AboutUS() {
               <div className="row">
                 <div className="col-lg-6">
                   <div className="section-title">
-                    <h2>About US</h2>
-                    <p>
+                    <h2 style={{ fontFamily: "Quicksand" }}>About US</h2>
+                    <p style={{ fontFamily: "Quicksand" }}>
                       We design and develop services for customers of all sizes,
                       specializing in creating stylish, modern websites
                     </p>
@@ -53,11 +59,37 @@ function AboutUS() {
                       <i className="fa-solid fa-users"></i>
                     </div>
                     <div className="feature-content">
-                      <div className="mt-1 mb-1 my-div">Members</div>
-                      <h5>ABC</h5>
-                      <h5>ABC</h5>
-                      <h5>ABC</h5>
-                      <h5>ABC</h5>
+                      <div
+                        className="mt-1 mb-1 my-div"
+                        style={{ fontFamily: "Quicksand" }}
+                      >
+                        Members
+                      </div>
+                      <h5 style={{ fontFamily: "Quicksand" }}>
+                        <a href="#" target="_blank">
+                          ABC
+                        </a>
+                      </h5>
+                      <h5 style={{ fontFamily: "Quicksand" }}>
+                        <a href="#" target="_blank">
+                          ABC
+                        </a>
+                      </h5>
+                      <h5 style={{ fontFamily: "Quicksand" }}>
+                        <a href="#" target="_blank">
+                          ABC
+                        </a>
+                      </h5>
+                      <h5 style={{ fontFamily: "Quicksand" }}>
+                        <a href="#" target="_blank">
+                          ABC
+                        </a>
+                      </h5>
+                      <h5 style={{ fontFamily: "Quicksand" }}>
+                        <a href="#" target="_blank">
+                          ABC
+                        </a>
+                      </h5>
                     </div>
                   </div>
                 </div>
@@ -67,37 +99,37 @@ function AboutUS() {
                       <i className="fa-brands fa-react"></i>
                     </div>
                     <div className="feature-content">
-                      <h5>React</h5>
+                      <h5 style={{ fontFamily: "Quicksand" }}>React</h5>
                     </div>
                   </div>
                 </div>
                 <div className="col-sm-6 col-lg-6">
                   <div className="feature-box-1">
                     <div className="icon">
-                      <i className="fa-brands fa-node"></i>
+                      <i class="fa-brands fa-node"></i>
                     </div>
                     <div className="feature-content">
-                      <h5>Node JS</h5>
+                      <h5 style={{ fontFamily: "Quicksand" }}>Node JS</h5>
                     </div>
                   </div>
                 </div>
                 <div className="col-sm-6 col-lg-6">
                   <div className="feature-box-1">
                     <div className="icon">
-                      <i className="fa-solid fa-database"></i>
+                      <i class="fa-solid fa-database"></i>
                     </div>
                     <div className="feature-content">
-                      <h5>PostgreSQL</h5>
+                      <h5 style={{ fontFamily: "Quicksand" }}>PostgreSQL</h5>
                     </div>
                   </div>
                 </div>
                 <div className="col-sm-6 col-lg-6">
                   <div className="feature-box-1">
                     <div className="icon">
-                      <i className="fa-brands fa-node-js"></i>
+                      <i class="fa-brands fa-node-js"></i>
                     </div>
                     <div className="feature-content">
-                      <h5>Express</h5>
+                      <h5 style={{ fontFamily: "Quicksand" }}>Express</h5>
                     </div>
                   </div>
                 </div>
@@ -107,7 +139,7 @@ function AboutUS() {
                       <i className="fa-brands fa-uikit"></i>
                     </div>
                     <div className="feature-content">
-                      <h5>Material UI</h5>
+                      <h5 style={{ fontFamily: "Quicksand" }}>Material UI</h5>
                     </div>
                   </div>
                 </div>
@@ -117,7 +149,7 @@ function AboutUS() {
                       <i className="fa-brands fa-bootstrap"></i>
                     </div>
                     <div className="feature-content">
-                      <h5>Bootstrap</h5>
+                      <h5 style={{ fontFamily: "Quicksand" }}>Bootstrap</h5>
                     </div>
                   </div>
                 </div>

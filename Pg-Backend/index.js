@@ -2,6 +2,7 @@ const express = require("express");
 const loginRoutes = require("./routes/login");
 const registerRoutes = require("./routes/register");
 const profileRoutes = require("./routes/profile");
+const productRoutes = require("./routes/product");
 const cors = require("cors");
 const dotenv = require("dotenv");
 
@@ -19,6 +20,7 @@ app.use(express.json());
 app.use("/api/v1/login", loginRoutes);
 app.use("/api/v1/register", registerRoutes);
 app.use("/api/v1/profile", profileRoutes);
+app.use("/api/v1/product", productRoutes);
 
 app.listen(port, () => {
   console.log(`app listening on port ${port}`);

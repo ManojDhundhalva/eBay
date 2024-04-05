@@ -68,7 +68,12 @@ const Profile = () => {
   });
   const UpdateProfile = async () => {
     setJustVerify(true);
-    if (firstName == "" || lastName == "") {
+    if (
+      firstName === "" ||
+      lastName === "" ||
+      firstName.length >= 255 ||
+      lastName.length >= 255
+    ) {
       return;
     }
     setLoading(true);
@@ -208,7 +213,10 @@ const Profile = () => {
                         }}
                         fullWidth
                         autoComplete="off"
-                        error={justVerify && firstName === ""}
+                        error={
+                          justVerify &&
+                          (firstName === "" || firstName.length >= 255)
+                        }
                         helperText={
                           firstName === "" &&
                           (justVerify ? "This field cannot be empty" : "")
@@ -225,7 +233,10 @@ const Profile = () => {
                         }}
                         fullWidth
                         autoComplete="off"
-                        error={justVerify && lastName === ""}
+                        error={
+                          justVerify &&
+                          (lastName === "" || lastName.length >= 255)
+                        }
                         helperText={
                           lastName === "" &&
                           (justVerify ? "This field cannot be empty" : "")

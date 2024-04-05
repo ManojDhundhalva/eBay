@@ -10,6 +10,7 @@ import { Button } from "@mui/material";
 import { useAuth } from "../context/auth";
 import { useNavigate } from "react-router-dom";
 import LocalMallIcon from "@mui/icons-material/LocalMall";
+import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 // import config from "../config.js";
 
 function Navbar() {
@@ -142,7 +143,27 @@ function Navbar() {
                 AboutUS
               </Link>
             </Button>
-
+            {window.localStorage.getItem("role") === "user" && (
+              <Button
+                disableRipple
+                variant="text"
+                style={{ transition: "all 0.5s ease" }}
+                sx={{
+                  "&:hover": {
+                    borderBottom: "1px solid #03045e",
+                    borderRadius: "5px",
+                  },
+                }}
+              >
+                <Link
+                  className="nav-link active"
+                  to="/cart"
+                  style={{ fontFamily: "Quicksand" }}
+                >
+                  <ShoppingCartOutlinedIcon />
+                </Link>
+              </Button>
+            )}
             {isLoggedIn ? (
               <>
                 <IconButton

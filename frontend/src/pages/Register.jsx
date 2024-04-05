@@ -58,7 +58,15 @@ export default function Register() {
     e.preventDefault();
     setJustVerify(true);
 
-    if (username === "" || email === "" || !validPassword || role === "") {
+    if (
+      username === "" ||
+      email === "" ||
+      !validPassword ||
+      role === "" ||
+      username.length >= 255 ||
+      email.length >= 255 ||
+      password.length >= 255
+    ) {
       return;
     }
 
@@ -146,7 +154,9 @@ export default function Register() {
                     fontWeight: "bold",
                   },
                 }}
-                error={justVerify && username === ""}
+                error={
+                  justVerify && (username === "" || username.length >= 255)
+                }
                 helperText={
                   justVerify &&
                   (username === "" ? "This field cannot be empty." : "")
@@ -172,7 +182,7 @@ export default function Register() {
                     fontWeight: "bold",
                   },
                 }}
-                error={justVerify && email === ""}
+                error={justVerify && (email === "" || email.length >= 255)}
                 helperText={
                   justVerify &&
                   (email === "" ? "This field cannot be empty." : "")
@@ -198,7 +208,10 @@ export default function Register() {
                     color: !validPassword ? "#f44336" : "#25396F",
                   },
                 }}
-                error={justVerify && (!validPassword || password === "")}
+                error={
+                  justVerify &&
+                  (!validPassword || password === "" || password.length >= 255)
+                }
                 helperText={
                   justVerify &&
                   (password === ""

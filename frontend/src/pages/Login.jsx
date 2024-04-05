@@ -57,7 +57,13 @@ export default function Login() {
     e.preventDefault();
 
     setJustVerify(true);
-    if (emailUsername === "" || password === "" || !validPassword) {
+    if (
+      emailUsername === "" ||
+      password === "" ||
+      !validPassword ||
+      emailUsername.length >= 255 ||
+      password.length > 255
+    ) {
       return;
     }
     setloading(true);
@@ -146,7 +152,10 @@ export default function Login() {
                     color: "#25396F",
                   },
                 }}
-                error={justVerify && emailUsername === ""}
+                error={
+                  justVerify &&
+                  (emailUsername === "" || emailUsername.length >= 255)
+                }
                 helperText={
                   justVerify &&
                   (emailUsername == "" ? "This field cannot be empty." : "")
@@ -171,7 +180,10 @@ export default function Login() {
                     color: !validPassword ? "#f44336" : "#25396F",
                   },
                 }}
-                error={justVerify && (!validPassword || password === "")}
+                error={
+                  justVerify &&
+                  (!validPassword || password === "" || password.length >= 255)
+                }
                 helperText={
                   justVerify &&
                   (password === ""
