@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useEffect, useState } from "react";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
@@ -8,7 +9,11 @@ import Agency from "../components/Agency";
 import Searchnearby from "../components/Searchnearby";
 import { useAuth } from "../context/auth";
 export default function Home() {
-  const { isLoggedIn } = useAuth();
+  const { isLoggedIn, validateUser } = useAuth();
+  useEffect(() => {
+    validateUser();
+  }, []);
+
   return (
     <>
       <div>Home</div>
@@ -69,8 +74,6 @@ export default function Home() {
           </CardContent>
         </CardActionArea>
       </Card> */}
-      {/* <Agency /> */}
-      {/* <Searchnearby /> */}
     </>
   );
 }

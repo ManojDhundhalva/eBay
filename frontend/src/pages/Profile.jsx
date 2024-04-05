@@ -30,30 +30,33 @@ const Profile = () => {
   const imageURL =
     "https://media.istockphoto.com/id/1300845620/vector/user-icon-flat-isolated-on-white-background-user-symbol-vector-illustration.jpg?s=612x612&w=0&k=20&c=yBeyba0hUkh14_jgv1OKqIH0CCSWU_4ckRkAoy2p73o=";
 
-  // const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(false);
   // const [name, setName] = useState("");
-  // const [userName, setUserName] = useState("abc");
-  // const [email, setEmail] = useState("abc@gmail.com");
-  // const [type, setType] = useState("User");
   // const [address, setAddress] = useState("");
-  // const [phoneNumber, setPhoneNumber] = useState("");
   // const [location, setLocation] = useState("");
-
+  // const [phoneNumber, setPhoneNumber] = useState("");
   // const [isValidPhone, setIsValidPhone] = useState(false);
 
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
+  const [userName, setUserName] = useState("abc");
+  const [email, setEmail] = useState("abc@gmail.com");
+  const [role, setRole] = useState("User");
 
   const navigate = useNavigate();
-  const { setIsLoggedIn } = useAuth();
+  const { setIsLoggedIn, validateUser, LogOut } = useAuth();
 
   const [justVerify, setJustVerify] = useState(false);
 
-  const validatePhoneNumber = (input) => {
-    const value = input.replace(/\D/g, "");
-    const isvalid = /^\d{10}$/.test(value);
-    setIsValidPhone(isvalid);
-  };
+  // const validatePhoneNumber = (input) => {
+  //   if (input) {
+  //     const value = input.replace(/\D/g, "");
+  //     const isValid = /^\d{10}$/.test(value);
+  //     setIsValidPhone(isValid);
+  //   } else {
+  //     setIsValidPhone(false); // Set to false if input is undefined
+  //   }
+  // };
 
   const theme = createTheme({
     typography: {
@@ -70,99 +73,54 @@ const Profile = () => {
     }
     setLoading(true);
 
-    const headers = {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${window.localStorage.getItem("token")}`,
-    };
-    try {
-      const results = await axios.post(
-        "http://localhost:8000/update-profile",
-        {
-          firstName,
-          lastName,
-        },
-        { headers }
-      );
+    // const headers = {
+    //   "Content-Type": "application/json",
+    //   Authorization: `Bearer ${window.localStorage.getItem("token")}`,
+    // };
+    // try {
+    //   const results = await axios.post(
+    //     "http://localhost:8000/update-profile",
+    //     {
+    //       firstName,
+    //       lastName,
+    //     },
+    //     { headers }
+    //   );
 
-      console.log(results);
-    } catch (err) {
-      console.log(err);
-    }
+    //   console.log(results);
+    // } catch (err) {
+    //   console.log(err);
+    // }
     setLoading(false);
   };
 
   const getProfile = async () => {
-    const headers = {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${window.localStorage.getItem("token")}`,
-    };
-
-    try {
-      const result = await axios.get("http://localhost:8000/profile", {
-        headers,
-      });
-      console.log("result", result.data.user);
-      const { user } = result.data;
-      setName(user.name);
-      setEmail(user.email);
-      setUserName(user.username);
-      setType(user.role);
-      setPhoneNumber(user.contact);
-      setAddress(user.address);
-      setLocation(user.location);
-      validatePhoneNumber(user.contact);
-    } catch (err) {
-      console.log(err);
-    }
+    // const headers = {
+    //   "Content-Type": "application/json",
+    //   Authorization: `Bearer ${window.localStorage.getItem("token")}`,
+    // };
+    // try {
+    //   const result = await axios.get("http://localhost:8000/profile", {
+    //     headers,
+    //   });
+    //   console.log("result", result.data.user);
+    //   const { user } = result.data;
+    //   setName(user.name);
+    //   setEmail(user.email);
+    //   setUserName(user.username);
+    //   setType(user.role);
+    //   setPhoneNumber(user.contact);
+    //   setAddress(user.address);
+    //   setLocation(user.location);
+    //   validatePhoneNumber(user.contact);
+    // } catch (err) {
+    //   console.log(err);
+    // }
   };
 
-  // function initializeTomTomSearchBox(apiKey) {
-  //   var options = {
-  //     searchOptions: {
-  //       key: apiKey,
-  //       language: "en-GB",
-  //       limit: 5,
-  //       placeholder: "Search for Nearby Location",
-  //     },
-  //     autocompleteOptions: {
-  //       key: apiKey,
-  //       language: "en-GB",
-  //     },
-  //   };
-
-  //   // Set the container to the ID of the div
-  //   options.container = "#searchBoxContainer";
-
-  //   var ttSearchBox = new tt.plugins.SearchBox(tt.services, options);
-
-  //   ttSearchBox.on("tomtom.searchbox.resultselected", function (data) {
-  //     document.getElementById("location").value =
-  //       String(data.data.result.position.lat) +
-  //       "," +
-  //       String(data.data.result.position.lng);
-  //   });
-
-  //   var searchBoxHTML = ttSearchBox.getSearchBoxHTML();
-  //   document.getElementById("searchBoxContainer").appendChild(searchBoxHTML);
-  // }
-
-  // const getLocation = () => {
-  //   let apiKey = "";
-  //   // Fetch the API key
-  //   axios
-  //     .get("/getTomTomApiKey")
-  //     .then((response) => {
-  //       apiKey = response.data.apiKey.trim();
-  //       initializeTomTomSearchBox(apiKey);
-  //     })
-  //     .catch((err) => {
-  //       console.error("Error: ", err);
-  //     });
-  // };
-
-  useEffect(() => {
-    getProfile();
-  }, []);
+  // useEffect(() => {
+  //   getProfile();
+  // }, []);
 
   useEffect(() => {
     AOS.init({
@@ -172,6 +130,9 @@ const Profile = () => {
     });
   }, []);
 
+  useEffect(() => {
+    validateUser();
+  }, []);
   return (
     <>
       <div
@@ -217,13 +178,6 @@ const Profile = () => {
                   >
                     {email}
                   </Typography>
-                  <Typography
-                    variant="subtitle1"
-                    color="textSecondary"
-                    sx={{ fontWeight: "bold" }}
-                  >
-                    +91 {phoneNumber}
-                  </Typography>
                 </CardContent>
               </Card>
             </Grid>
@@ -244,17 +198,33 @@ const Profile = () => {
                       <TextField
                         id="standard-helperText-1"
                         label="First Name"
-                        value={name}
+                        value={firstName}
                         onChange={(e) => {
-                          setName(e.target.value);
+                          setFirstName(e.target.value);
                         }}
                         fullWidth
                         autoComplete="off"
-                        error={justVerify && name === ""}
+                        error={justVerify && firstName === ""}
                         helperText={
-                          name === "" && justVerify
-                            ? "Please enter a valid name containing only letters."
-                            : ""
+                          firstName === "" &&
+                          (justVerify ? "This field cannot be empty" : "")
+                        }
+                      />
+                    </Grid>
+                    <Grid item xs={10} style={{ marginTop: "1em" }}>
+                      <TextField
+                        id="standard-helperText-1"
+                        label="First Name"
+                        value={lastName}
+                        onChange={(e) => {
+                          setLastName(e.target.value);
+                        }}
+                        fullWidth
+                        autoComplete="off"
+                        error={justVerify && lastName === ""}
+                        helperText={
+                          lastName === "" &&
+                          (justVerify ? "This field cannot be empty" : "")
                         }
                       />
                     </Grid>
@@ -285,76 +255,13 @@ const Profile = () => {
                     <Grid item xs={10} style={{ marginTop: "0.4em" }}>
                       <TextField
                         id="standard-helperText-4"
-                        label="Type"
-                        value={type}
+                        label="Role"
+                        value={role}
                         InputProps={{
                           readOnly: true,
                         }}
                         fullWidth
                         autoComplete="off"
-                      />
-                    </Grid>
-                    <Grid item xs={10} style={{ marginTop: "0.4em" }}>
-                      <TextField
-                        id="standard-helperText-1"
-                        label="Address"
-                        value={address}
-                        onChange={(e) => {
-                          setAddress(e.target.value);
-                        }}
-                        fullWidth
-                        autoComplete="off"
-                        error={justVerify && address === ""}
-                        helperText={
-                          address === "" && justVerify
-                            ? "address cnnnot be empty."
-                            : ""
-                        }
-                        multiline
-                        rows={3}
-                      />
-                    </Grid>
-                    <Grid item xs={10} style={{ marginTop: "0.4em" }}>
-                      <TextField
-                        id="standard-helperText-8"
-                        label="Phone No."
-                        value={phoneNumber}
-                        onChange={(e) => {
-                          validatePhoneNumber(e.target.value);
-                          setPhoneNumber(e.target.value);
-                        }}
-                        fullWidth
-                        autoComplete="off"
-                        error={!isValidPhone && justVerify}
-                        helperText={
-                          !isValidPhone && justVerify
-                            ? "Please enter a 10-digit number."
-                            : ""
-                        }
-                      />
-                    </Grid>
-                    <Grid
-                      item
-                      xs={10}
-                      style={{ marginTop: "0.4em" }}
-                      id="searchBoxContainer"
-                    ></Grid>
-                    <Grid item xs={10} style={{ marginTop: "0.4em" }}>
-                      <TextField
-                        id="location"
-                        label="Location"
-                        value={location}
-                        onChange={(e) => {
-                          setLocation(e.target.value);
-                        }}
-                        style={{ visibility: "hidden" }}
-                        error={justVerify && location === ""}
-                        helperText={
-                          justVerify && location === ""
-                            ? "Please select your location"
-                            : ""
-                        }
-                        fullWidth
                       />
                     </Grid>
                   </Grid>

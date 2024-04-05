@@ -19,13 +19,31 @@ export const AuthProvider = ({ children }) => {
     navigate("/");
   };
 
+  const validateUser = () => {
+    if (
+      !(
+        window.localStorage.getItem("token") !== null &&
+        window.localStorage.getItem("role") !== null
+      )
+    ) {
+      LogOut();
+    }
+  };
+
   useEffect(() => {
     setIsLoggedIn(window.localStorage.getItem("token") !== null);
   }, []);
 
   return (
     <authContext.Provider
-      value={{ theme, toggleTheme, isLoggedIn, setIsLoggedIn, LogOut }}
+      value={{
+        theme,
+        toggleTheme,
+        isLoggedIn,
+        setIsLoggedIn,
+        LogOut,
+        validateUser,
+      }}
     >
       {children}
     </authContext.Provider>

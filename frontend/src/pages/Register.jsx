@@ -15,6 +15,7 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../context/auth";
 // import Form from 'react-bootstrap/Form';
 
 // import BackgroundVideo from '../Context/backgroundVideo';
@@ -51,6 +52,7 @@ export default function Register() {
   const [role, setRole] = useState("");
 
   const navigate = useNavigate();
+  const { validateUser } = useAuth();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -79,8 +81,12 @@ export default function Register() {
     setloading(false);
   };
 
+  useEffect(() => {
+    validateUser();
+  }, []);
+
   return (
-    <div className="my-glass-effect" style={{ backgroundColor: "lightblue" }}>
+    <div className="my-glass-effect">
       <ThemeProvider theme={defaultTheme}>
         <Container
           component="main"
@@ -89,6 +95,10 @@ export default function Register() {
         >
           <CssBaseline />
           <Box
+            style={{
+              backgroundColor: "#caf0f8",
+              boxShadow: "0px 4px 8px #caf0f8",
+            }}
             sx={{
               marginTop: 12,
               marginBottom: 12,
@@ -264,7 +274,7 @@ export default function Register() {
                     style={{
                       fontFamily: "Quicksand",
                       fontWeight: "bold",
-                      color: "ghostwhite",
+                      color: "#03045e",
                       textDecoration: "underline",
                     }}
                   >

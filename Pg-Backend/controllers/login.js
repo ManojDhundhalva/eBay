@@ -22,7 +22,7 @@ const getAccount = async (req, resp) => {
     const result = await compareAsync(password, storedPassword);
 
     if (result) {
-      const token = jwt.sign({ id }, process.env.JWT_SECRET_KEY, {
+      const token = jwt.sign({ id, role }, process.env.JWT_SECRET_KEY, {
         expiresIn: "1d",
       });
       resp.status(200).json({ token, role });
