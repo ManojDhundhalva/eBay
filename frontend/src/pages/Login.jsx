@@ -69,6 +69,7 @@ export default function Login() {
       });
 
       window.localStorage.setItem("token", results.data.token);
+      window.localStorage.setItem("username", results.data.username);
       window.localStorage.setItem("role", results.data.role);
 
       setIsLoggedIn(true);

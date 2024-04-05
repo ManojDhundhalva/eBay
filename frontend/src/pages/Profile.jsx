@@ -95,32 +95,33 @@ const Profile = () => {
   };
 
   const getProfile = async () => {
-    // const headers = {
-    //   "Content-Type": "application/json",
-    //   Authorization: `Bearer ${window.localStorage.getItem("token")}`,
-    // };
-    // try {
-    //   const result = await axios.get("http://localhost:8000/profile", {
-    //     headers,
-    //   });
-    //   console.log("result", result.data.user);
-    //   const { user } = result.data;
-    //   setName(user.name);
-    //   setEmail(user.email);
-    //   setUserName(user.username);
-    //   setType(user.role);
-    //   setPhoneNumber(user.contact);
-    //   setAddress(user.address);
-    //   setLocation(user.location);
-    //   validatePhoneNumber(user.contact);
-    // } catch (err) {
-    //   console.log(err);
-    // }
+    const headers = {
+      "Content-Type": "application/json",
+      authorization: `Bearer ${window.localStorage.getItem("token")}`,
+    };
+    try {
+      const result = await axios.get(
+        `http://localhost:8000/api/v1/profile?username=${window.localStorage.getItem(
+          "username"
+        )}&role=${window.localStorage.getItem("role")}`,
+        {
+          headers,
+        }
+      );
+      const user = result.data;
+      setFirstName(user.firstname);
+      setLastName(user.lastname);
+      setUserName(user.username);
+      setEmail(user.emailid);
+      setRole(user.role);
+    } catch (err) {
+      console.log("Error -> ", err);
+    }
   };
 
-  // useEffect(() => {
-  //   getProfile();
-  // }, []);
+  useEffect(() => {
+    getProfile();
+  }, []);
 
   useEffect(() => {
     AOS.init({
@@ -133,6 +134,7 @@ const Profile = () => {
   useEffect(() => {
     validateUser();
   }, []);
+
   return (
     <>
       <div
@@ -242,7 +244,7 @@ const Profile = () => {
                     </Grid>
                     <Grid item xs={10}>
                       <TextField
-                        id="outlined-read-only-input-5"
+                        id="standard-helperText-4"
                         label="Email"
                         value={email}
                         InputProps={{

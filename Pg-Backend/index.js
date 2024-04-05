@@ -1,8 +1,9 @@
 const express = require("express");
 const loginRoutes = require("./routes/login");
 const registerRoutes = require("./routes/register");
-const cors = require('cors');
-const dotenv = require('dotenv');
+const profileRoutes = require("./routes/profile");
+const cors = require("cors");
+const dotenv = require("dotenv");
 
 dotenv.config();
 const app = express();
@@ -17,6 +18,7 @@ app.use(express.json());
 
 app.use("/api/v1/login", loginRoutes);
 app.use("/api/v1/register", registerRoutes);
+app.use("/api/v1/profile", profileRoutes);
 
 app.listen(port, () => {
   console.log(`app listening on port ${port}`);

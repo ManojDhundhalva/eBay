@@ -14,6 +14,7 @@ export const AuthProvider = ({ children }) => {
 
   const LogOut = () => {
     window.localStorage.removeItem("token");
+    window.localStorage.removeItem("username");
     window.localStorage.removeItem("role");
     setIsLoggedIn(false);
     navigate("/");
@@ -21,8 +22,10 @@ export const AuthProvider = ({ children }) => {
 
   const validateUser = () => {
     if (
+      isLoggedIn &&
       !(
         window.localStorage.getItem("token") !== null &&
+        window.localStorage.getItem("username") !== null &&
         window.localStorage.getItem("role") !== null
       )
     ) {

@@ -13,12 +13,14 @@ const createAccount = async (req, resp) => {
   try {
     const usernameResult = await pool.query(queries.getUserName, [username]);
     if (usernameResult.rows.length !== 0) {
-      return resp.status(401).json("UserName Already Exist");
+      return resp.status(401).json({ message: "UserName Already Exist" });
     }
 
     const emailResult = await pool.query(queries.getEmailId, [emailid]);
     if (emailResult.rows.length !== 0) {
-      return resp.status(401).json("Email-id is Already Registered");
+      return resp
+        .status(401)
+        .json({ message: "Email-id is Already Registered" });
     }
 
     const newPassword = await hashAsync(password, saltRounds);
@@ -30,10 +32,10 @@ const createAccount = async (req, resp) => {
       role,
     ]);
 
-    resp.status(201).json("Created Successfully");
+    resp.status(201).json({ message: "Created Successfully" });
   } catch (error) {
     console.error(error);
-    resp.status(500).json("Internal Server Error");
+    resp.status(500).json({ message: "Internal Server Error" });
   }
 };
 

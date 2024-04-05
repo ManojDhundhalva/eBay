@@ -9,6 +9,7 @@ import IconButton from "@mui/material/IconButton";
 import { Button } from "@mui/material";
 import { useAuth } from "../context/auth";
 import { useNavigate } from "react-router-dom";
+import LocalMallIcon from "@mui/icons-material/LocalMall";
 // import config from "../config.js";
 
 function Navbar() {
@@ -46,7 +47,7 @@ function Navbar() {
             fontFamily: "Quicksand",
           }}
         >
-          <i className="fa-brands fa-shopify"></i> eBay
+          <LocalMallIcon /> eBay
         </Link>
         <button
           className="navbar-toggler"

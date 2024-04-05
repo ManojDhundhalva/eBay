@@ -74,7 +74,7 @@ function AboutUS() {
                 <div className="col-sm-6 col-lg-6">
                   <div className="feature-box-1">
                     <div className="icon">
-                      <i class="fa-brands fa-node"></i>
+                      <i className="fa-brands fa-node"></i>
                     </div>
                     <div className="feature-content">
                       <h5>Node JS</h5>
@@ -84,7 +84,7 @@ function AboutUS() {
                 <div className="col-sm-6 col-lg-6">
                   <div className="feature-box-1">
                     <div className="icon">
-                      <i class="fa-solid fa-database"></i>
+                      <i className="fa-solid fa-database"></i>
                     </div>
                     <div className="feature-content">
                       <h5>PostgreSQL</h5>
@@ -94,7 +94,7 @@ function AboutUS() {
                 <div className="col-sm-6 col-lg-6">
                   <div className="feature-box-1">
                     <div className="icon">
-                      <i class="fa-brands fa-node-js"></i>
+                      <i className="fa-brands fa-node-js"></i>
                     </div>
                     <div className="feature-content">
                       <h5>Express</h5>
