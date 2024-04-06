@@ -82,48 +82,6 @@ function Navbar() {
                 Home
               </Link>
             </Button>
-            {/* {window.localStorage.getItem("role") === '"compostAgency"' && (
-              <>
-                <Button
-                  disableRipple
-                  variant="text"
-                  style={{ transition: "all 0.5s ease" }}
-                  sx={{
-                    "&:hover": {
-                      borderBottom: "1px solid #03045e",
-                      borderRadius: "5px",
-                    },
-                  }}
-                >
-                  <Link
-                    className="nav-link active"
-                    to="/agency_rewards"
-                    style={{ fontFamily: "Quicksand" }}
-                  >
-                    Rewards
-                  </Link>
-                </Button>
-                <Button
-                  disableRipple
-                  variant="text"
-                  style={{ transition: "all 0.5s ease" }}
-                  sx={{
-                    "&:hover": {
-                      borderBottom: "1px solid #03045e",
-                      borderRadius: "5px",
-                    },
-                  }}
-                >
-                  <Link
-                    className="nav-link active"
-                    to="/history"
-                    style={{ fontFamily: "Quicksand" }}
-                  >
-                    History
-                  </Link>
-                </Button>
-              </>
-            )} */}
             <Button
               disableRipple
               variant="text"
@@ -144,25 +102,46 @@ function Navbar() {
               </Link>
             </Button>
             {window.localStorage.getItem("role") === "user" && (
-              <Button
-                disableRipple
-                variant="text"
-                style={{ transition: "all 0.5s ease" }}
-                sx={{
-                  "&:hover": {
-                    borderBottom: "1px solid #03045e",
-                    borderRadius: "5px",
-                  },
-                }}
-              >
-                <Link
-                  className="nav-link active"
-                  to="/cart"
-                  style={{ fontFamily: "Quicksand" }}
+              <>
+                <Button
+                  disableRipple
+                  variant="text"
+                  style={{ transition: "all 0.5s ease" }}
+                  sx={{
+                    "&:hover": {
+                      borderBottom: "1px solid #03045e",
+                      borderRadius: "5px",
+                    },
+                  }}
                 >
-                  <ShoppingCartOutlinedIcon />
-                </Link>
-              </Button>
+                  <Link
+                    className="nav-link active"
+                    to="/history-product"
+                    style={{ fontFamily: "Quicksand" }}
+                  >
+                    List Product
+                  </Link>
+                </Button>
+                <Button
+                  disableRipple
+                  variant="text"
+                  style={{ transition: "all 0.5s ease" }}
+                  sx={{
+                    "&:hover": {
+                      borderBottom: "1px solid #03045e",
+                      borderRadius: "5px",
+                    },
+                  }}
+                >
+                  <Link
+                    className="nav-link active"
+                    to="/cart"
+                    style={{ fontFamily: "Quicksand" }}
+                  >
+                    <ShoppingCartOutlinedIcon />
+                  </Link>
+                </Button>
+              </>
             )}
             {isLoggedIn ? (
               <>

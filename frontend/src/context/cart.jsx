@@ -1,11 +1,13 @@
 import React, { createContext, useState, useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { useAuth } from "./auth";
 
 const cartContext = createContext();
 
 export const CartProvider = ({ children }) => {
   const [cart, setCart] = useState([]);
+  const { isLoggedIn } = useAuth();
 
   const getAllCart = async () => {
     const headers = {
@@ -70,8 +72,10 @@ export const CartProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    getAllCart();
-  }, []);
+    if (isLoggedIn) {
+      getAllCart();
+    }
+  }, [isLoggedIn]);
 
   return (
     <cartContext.Provider

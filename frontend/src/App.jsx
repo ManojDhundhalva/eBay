@@ -10,6 +10,8 @@ import Footer from "./components/Footer";
 import AboutUS from "./pages/AboutUs";
 import Cart from "./pages/Cart";
 import ProductDetails from "./pages/ProductDetails";
+import HistoryOfListedProduct from "./pages/HistoryOfListedProduct";
+import ListProduct from "./pages/ListProduct";
 
 function App() {
   // const { isLoggedIn } = useAuth();
@@ -24,6 +26,16 @@ function App() {
         <Route exact path="/aboutus" element={<AboutUS />} />
         <Route exact path="/cart" element={<Cart />} />
         <Route exact path="/product-details" element={<ProductDetails />} />
+        <Route
+          exact
+          path="/history-product"
+          element={<HistoryOfListedProduct />}
+        />
+        <Route
+          exact
+          path="/list-product"
+          element={<ListProduct />}
+        />
       </Routes>
       <Footer />
     </>
