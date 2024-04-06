@@ -26,13 +26,6 @@ function User() {
     }
   };
 
-  const addToCart = () => {
-    console.log("addToCart");
-  };
-  const removeFromTheCart = () => {
-    console.log("removeFromTheCart");
-  };
-
   useEffect(() => {
     getAllProducts();
   }, []);
@@ -42,11 +35,7 @@ function User() {
       <Grid container spacing={2}>
         {allProduct.map((data, index) => (
           <Grid key={index} xs={3} item>
-           <Product
-            data={data}
-            addToCart={addToCart}
-            removeFromTheCart={removeFromTheCart}
-          />
+            <Product data={data} />
           </Grid>
         ))}
       </Grid>
