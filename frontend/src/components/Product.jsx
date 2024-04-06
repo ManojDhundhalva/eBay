@@ -5,31 +5,38 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import { Button, CardActionArea, CardActions } from "@mui/material";
-import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
-import RemoveShoppingCartIcon from "@mui/icons-material/RemoveShoppingCart";
-import { useCart } from "../context/cart";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 export default function Product({ data }) {
   const { product_id, product_image, product_price, product_title } = data;
+  const navigate = useNavigate();
 
-  const { cart, addToCart, deleteFromCart } = useCart();
-  const [isAdded, setIsAdded] = useState(false);
-
-  const checkIsAdded = () => {
-    for (let i = 0; i < cart.length; i++) {
-      if (Number(cart[i].product_id) === Number(product_id)) {
-        setIsAdded(true);
-        break;
-      }
+  const handleProductDetails = async () => {
+    const headers = {
+      "Content-Type": "application/json",
+      authorization: `Bearer ${window.localStorage.getItem("token")}`,
+    };
+    try {
+      const results = await axios.post(
+        `http://localhost:8000/api/v1/product/increase-view-count?username=${window.localStorage.getItem(
+          "username"
+        )}&role=${window.localStorage.getItem("role")}`,
+        { product_id },
+        {
+          headers,
+        }
+      );
+      window.localStorage.setItem("product-id", product_id);
+      navigate("/product-details");
+    } catch (err) {
+      console.log("Error -> ", err);
     }
   };
 
-  useEffect(() => {
-    checkIsAdded();
-  }, []);
   return (
     <>
-      <Card sx={{ maxWidth: 345 }}>
+      <Card sx={{ maxWidth: 345 }} onClick={handleProductDetails}>
         <CardActionArea>
           <CardMedia
             component="img"
@@ -46,29 +53,7 @@ export default function Product({ data }) {
             </Typography>
           </CardContent>
         </CardActionArea>
-        <CardActions>
-          {!isAdded ? (
-            <Button
-              variant="contained"
-              onClick={() => {
-                addToCart(product_id);
-                setIsAdded(true);
-              }}
-            >
-              Add To Cart &nbsp; <ShoppingCartOutlinedIcon />
-            </Button>
-          ) : (
-            <Button
-              variant="contained"
-              onClick={() => {
-                deleteFromCart(product_id);
-                setIsAdded(false);
-              }}
-            >
-              Remove From The Cart &nbsp; <RemoveShoppingCartIcon />
-            </Button>
-          )}
-        </CardActions>
+        <CardActions>hello</CardActions>
       </Card>
     </>
   );

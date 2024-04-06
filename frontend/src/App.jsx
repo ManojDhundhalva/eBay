@@ -9,6 +9,7 @@ import Footer from "./components/Footer";
 // import { useAuth } from "./context/auth";
 import AboutUS from "./pages/AboutUs";
 import Cart from "./pages/Cart";
+import ProductDetails from "./pages/ProductDetails";
 
 function App() {
   // const { isLoggedIn } = useAuth();
@@ -22,6 +23,7 @@ function App() {
         <Route exact path="/profile" element={<Profile />} />
         <Route exact path="/aboutus" element={<AboutUS />} />
         <Route exact path="/cart" element={<Cart />} />
+        <Route exact path="/product-details" element={<ProductDetails />} />
       </Routes>
       <Footer />
     </>
