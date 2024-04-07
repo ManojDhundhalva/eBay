@@ -7,7 +7,20 @@ const cartContext = createContext();
 
 export const CartProvider = ({ children }) => {
   const [cart, setCart] = useState([]);
+  const [hasOrdered, setHasOrdered] = useState(false);
   const { isLoggedIn } = useAuth();
+
+  function calculateTotalCost() {
+    let totalCost = 0;
+
+    for (let i = 0; i < cart.length; i++) {
+      let itemPrice = Number(cart[i].product_price);
+      let itemQuantity = Number(cart[i].product_quantity);
+      totalCost += itemPrice * itemQuantity;
+    }
+
+    return Number(totalCost);
+  }
 
   const getAllCart = async () => {
     const headers = {
@@ -83,6 +96,9 @@ export const CartProvider = ({ children }) => {
         cart,
         addToCart,
         deleteFromCart,
+        hasOrdered,
+        setHasOrdered,
+        calculateTotalCost,
       }}
     >
       {children}

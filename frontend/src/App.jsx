@@ -12,6 +12,7 @@ import Cart from "./pages/Cart";
 import ProductDetails from "./pages/ProductDetails";
 import HistoryOfListedProduct from "./pages/HistoryOfListedProduct";
 import ListProduct from "./pages/ListProduct";
+import AddressInfo from "./pages/AddressInfo";
 
 function App() {
   // const { isLoggedIn } = useAuth();
@@ -31,11 +32,8 @@ function App() {
           path="/history-product"
           element={<HistoryOfListedProduct />}
         />
-        <Route
-          exact
-          path="/list-product"
-          element={<ListProduct />}
-        />
+        <Route exact path="/list-product" element={<ListProduct />} />
+        <Route exact path="/address-info" element={<AddressInfo />} />
       </Routes>
       <Footer />
     </>

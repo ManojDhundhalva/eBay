@@ -4,6 +4,7 @@ const registerRoutes = require("./routes/register");
 const profileRoutes = require("./routes/profile");
 const productRoutes = require("./routes/product");
 const cartRoutes = require("./routes/cart");
+const orderRoutes = require("./routes/order");
 const cors = require("cors");
 const dotenv = require("dotenv");
 
@@ -23,6 +24,7 @@ app.use("/api/v1/register", registerRoutes);
 app.use("/api/v1/profile", profileRoutes);
 app.use("/api/v1/product", productRoutes);
 app.use("/api/v1/cart", cartRoutes);
+app.use("/api/v1/order", orderRoutes);
 
 app.listen(port, () => {
   console.log(`app listening on port ${port}`);

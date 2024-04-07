@@ -3,6 +3,7 @@ SELECT
     p.product_id, 
     p.product_title, 
     p.product_price, 
+    p.product_quantity,
     ARRAY_AGG(pi.product_image) AS product_images 
 FROM 
     product AS p 
