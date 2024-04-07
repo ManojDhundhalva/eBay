@@ -139,10 +139,31 @@ const getAllListedProduct = async (req, resp) => {
   }
 };
 
+const getAllPurchasedProduct = async (req, resp) => {
+  if (req.user.role === "user") {
+    try {
+      const results = await pool.query(queries.getAllPurchasedProductByUserId, [
+        req.user.id,
+      ]);
+
+      resp.status(200).json(results.rows);
+    } catch (err) {
+      console.log("Error -> ", err);
+      resp.status(500).json({ message: "Internal Server Error" });
+    }
+  } else {
+    resp.status(404).json({
+      message:
+        "You are not a user, therefore you can't see this listed products",
+    });
+  }
+};
+
 module.exports = {
   getAllProducts,
   viewProduct,
   increaseViewCount,
   listProduct,
   getAllListedProduct,
+  getAllPurchasedProduct,
 };

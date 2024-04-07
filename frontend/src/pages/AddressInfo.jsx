@@ -52,7 +52,8 @@ function AddressInfo() {
           headers,
         }
       );
-      console.log(results);
+      // console.log(results);
+      navigate("/");
     } catch (err) {
       console.log("Error -> ", err);
     }

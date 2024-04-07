@@ -8,6 +8,18 @@ WHERE
     s.seller_user_id = $1
 `;
 
+const addBankAccountByUserId = `
+INSERT INTO bank_details (account_number) 
+VALUES ($1)
+`;
+
+const addSeller = `
+INSERT INTO seller (seller_user_id, seller_account_number)
+VALUES ($1, $2)
+`;
+
 module.exports = {
   getBankAccountByUserId,
+  addBankAccountByUserId,
+  addSeller,
 };

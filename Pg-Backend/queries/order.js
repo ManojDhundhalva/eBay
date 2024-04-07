@@ -44,10 +44,16 @@ INSERT INTO has_order (
 VALUES ($1, $2, $3);
 `;
 
+const emptyCart = `
+DELETE FROM cart
+WHERE user_id = $1
+`;
+
 module.exports = {
   addPayment,
   getPaymentTransactionId,
   addOrder,
   findOrderId,
   addTableOfHasOrder,
+  emptyCart,
 };

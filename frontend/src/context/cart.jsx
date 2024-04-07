@@ -8,8 +8,9 @@ const cartContext = createContext();
 export const CartProvider = ({ children }) => {
   const [cart, setCart] = useState([]);
   const [hasOrdered, setHasOrdered] = useState(false);
-  const [hasBankAccount, setHasBankAccount] = useState(false);
+  const [hasAccount, setHasAccount] = useState(false);
   const { isLoggedIn } = useAuth();
+  const navigate = useNavigate();
 
   function calculateTotalCost() {
     let totalCost = 0;
@@ -99,11 +100,8 @@ export const CartProvider = ({ children }) => {
           headers,
         }
       );
-      if (results.data.length === 0) {
-        setHasBankAccount(false);
-      } else {
-        setHasBankAccount(true);
-      }
+      setHasAccount(results.data.isBankAccount);
+      // window.localStorage.setItem("isAccount", results.data.isBankAccount);
     } catch (err) {
       console.log("Error -> ", err);
     }
@@ -125,8 +123,9 @@ export const CartProvider = ({ children }) => {
         hasOrdered,
         setHasOrdered,
         calculateTotalCost,
-        hasBankAccount,
-        setHasBankAccount,
+        getBankAccount,
+        hasAccount,
+        setHasAccount,
       }}
     >
       {children}

@@ -14,9 +14,10 @@ import HistoryOfListedProduct from "./pages/HistoryOfListedProduct";
 import ListProduct from "./pages/ListProduct";
 import AddressInfo from "./pages/AddressInfo";
 import BankDetails from "./pages/BankDetails";
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 function App() {
-  // const { isLoggedIn } = useAuth();
   return (
     <>
       <Navbar />

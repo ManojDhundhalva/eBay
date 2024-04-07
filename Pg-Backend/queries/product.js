@@ -99,6 +99,30 @@ GROUP BY
     p.product_id;
 `;
 
+const getAllPurchasedProductByUserId = `
+SELECT
+    o.*,
+    h.*,
+    p.*,
+    ARRAY_AGG(pi.product_image) AS product_images
+FROM
+    product AS p
+LEFT JOIN
+    product_image AS pi ON p.product_id = pi.product_id
+JOIN
+    has_order AS h ON h.has_order_product_id = p.product_id
+JOIN
+    order_details AS o ON h.has_order_id = o.order_id
+WHERE
+    p.product_seller_id = $1
+GROUP BY
+    h.has_order_id,
+    p.product_id,
+    h.has_order_unique_id,
+    h.has_order_product_id,
+	o.order_id
+`;
+
 module.exports = {
   getAllProduct,
   viewProduct,
@@ -109,4 +133,5 @@ module.exports = {
   getProductIdByUniqueId,
   listImageIntoImageTableByUniqueId,
   getAllListedProductBySellerId,
+  getAllPurchasedProductByUserId,
 };

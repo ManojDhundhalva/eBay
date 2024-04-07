@@ -69,6 +69,8 @@ const putOrder = async (req, resp) => {
       ]);
     }
 
+    const result6 = await pool.query(queries.emptyCart, [req.user.id]);
+
     resp.status(200).json({ message: "Ordered Succesfully" });
   } else {
     resp
