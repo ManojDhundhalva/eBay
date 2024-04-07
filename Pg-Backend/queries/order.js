@@ -7,7 +7,7 @@ VALUES ($1, $2);
 `;
 
 const getPaymentTransactionId = `
-SELECT payment_transaction_id 
+SELECT payment_transaction_id FROM payment
 WHERE payment_transaction_unique_id = $1;
 `;
 

@@ -32,8 +32,8 @@ function AddressInfo() {
       authorization: `Bearer ${window.localStorage.getItem("token")}`,
     };
     try {
-      const result = await axios.post(
-        `http://localhost:8000/api/v1/profile?username=${window.localStorage.getItem(
+      const results = await axios.post(
+        `http://localhost:8000/api/v1/order?username=${window.localStorage.getItem(
           "username"
         )}&role=${window.localStorage.getItem("role")}`,
         {
@@ -52,6 +52,7 @@ function AddressInfo() {
           headers,
         }
       );
+      console.log(results);
     } catch (err) {
       console.log("Error -> ", err);
     }

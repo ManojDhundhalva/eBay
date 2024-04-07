@@ -8,6 +8,7 @@ const cartContext = createContext();
 export const CartProvider = ({ children }) => {
   const [cart, setCart] = useState([]);
   const [hasOrdered, setHasOrdered] = useState(false);
+  const [hasBankAccount, setHasBankAccount] = useState(false);
   const { isLoggedIn } = useAuth();
 
   function calculateTotalCost() {
@@ -84,9 +85,34 @@ export const CartProvider = ({ children }) => {
     }
   };
 
+  const getBankAccount = async () => {
+    const headers = {
+      "Content-Type": "application/json",
+      authorization: `Bearer ${window.localStorage.getItem("token")}`,
+    };
+    try {
+      const results = await axios.get(
+        `http://localhost:8000/api/v1/seller?username=${window.localStorage.getItem(
+          "username"
+        )}&role=${window.localStorage.getItem("role")}`,
+        {
+          headers,
+        }
+      );
+      if (results.data.length === 0) {
+        setHasBankAccount(false);
+      } else {
+        setHasBankAccount(true);
+      }
+    } catch (err) {
+      console.log("Error -> ", err);
+    }
+  };
+
   useEffect(() => {
     if (isLoggedIn) {
       getAllCart();
+      getBankAccount();
     }
   }, [isLoggedIn]);
 
@@ -99,6 +125,8 @@ export const CartProvider = ({ children }) => {
         hasOrdered,
         setHasOrdered,
         calculateTotalCost,
+        hasBankAccount,
+        setHasBankAccount,
       }}
     >
       {children}

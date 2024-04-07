@@ -24,6 +24,7 @@ import Typography from "@mui/material/Typography";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import TextField from "@mui/material/TextField";
+import { useCart } from "../context/cart";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import axios from "axios";
@@ -35,6 +36,7 @@ const ListProduct = () => {
   const [productDescription, setProductDescription] = useState("");
   const [inputs, setInputs] = useState([""]);
   const navigate = useNavigate();
+  const { hasBankAccount } = useCart();
 
   const handleAddInput = () => {
     setInputs([...inputs, ""]);
@@ -88,6 +90,12 @@ const ListProduct = () => {
       },
     },
   });
+
+  useEffect(() => {
+    if (!hasBankAccount) {
+      navigate("/bank-account");
+    }
+  }, []);
 
   useEffect(() => {
     AOS.init({
@@ -152,6 +160,9 @@ const ListProduct = () => {
       </Button>
       <Button variant="contained" onClick={handleListProduct}>
         List Product
+      </Button>
+      <Button variant="contained" onClick={handleListProduct}>
+        Update Bank Account
       </Button>
       <div className="mt-5">&nbsp;</div>
       <div className="mt-5">&nbsp;</div>

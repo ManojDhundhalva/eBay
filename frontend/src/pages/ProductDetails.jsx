@@ -80,6 +80,7 @@ function ProductDetails({ data }) {
         <CardActions> hello</CardActions>
       </Card>
       <h2>ProductDetails</h2>
+      <div>username : {productDetails.username}</div>
       <div>product_id : {productDetails.product_id}</div>
       <div>product_seller_id :{productDetails.product_seller_id}</div>
       <div>product_title: {productDetails.product_title}</div>

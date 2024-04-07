@@ -23,12 +23,14 @@ import AccordionDetails from "@mui/material/AccordionDetails";
 import Typography from "@mui/material/Typography";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { useCart } from "../context/cart";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import axios from "axios";
 
 const HistoryOfListedProduct = () => {
   const [history, setHistory] = useState([]);
+  const { hasBankAccount } = useCart();
   const navigate = useNavigate();
 
   const getAllListedProduct = async () => {
@@ -52,7 +54,11 @@ const HistoryOfListedProduct = () => {
   };
 
   useEffect(() => {
-    getAllListedProduct();
+    if (!hasBankAccount) {
+      navigate("/bank-account");
+    } else {
+      getAllListedProduct();
+    }
   }, []);
 
   const theme = createTheme({

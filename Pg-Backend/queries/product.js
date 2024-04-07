@@ -21,6 +21,7 @@ LIMIT 10
 
 const viewProduct = `
 SELECT 
+    u.username,
     p.product_id, 
     p.product_unique_id, 
     p.product_seller_id,
@@ -35,9 +36,12 @@ FROM
     product AS p 
 LEFT JOIN 
     product_image AS pi ON p.product_id = pi.product_id 
+JOIN 
+    users AS u ON u.id = p.product_seller_id
 WHERE 
     p.product_id = $1 
 GROUP BY 
+    u.username,
     p.product_id, 
     p.product_unique_id, 
     p.product_title, 

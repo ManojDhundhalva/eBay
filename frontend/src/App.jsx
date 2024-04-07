@@ -13,6 +13,7 @@ import ProductDetails from "./pages/ProductDetails";
 import HistoryOfListedProduct from "./pages/HistoryOfListedProduct";
 import ListProduct from "./pages/ListProduct";
 import AddressInfo from "./pages/AddressInfo";
+import BankDetails from "./pages/BankDetails";
 
 function App() {
   // const { isLoggedIn } = useAuth();
@@ -34,6 +35,7 @@ function App() {
         />
         <Route exact path="/list-product" element={<ListProduct />} />
         <Route exact path="/address-info" element={<AddressInfo />} />
+        <Route exact path="/bank-account" element={<BankDetails />} />
       </Routes>
       <Footer />
     </>
