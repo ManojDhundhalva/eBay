@@ -8,6 +8,12 @@ WHERE
     s.seller_user_id = $1
 `;
 
+const ifExistBankAccountByAccountNumber = `
+SELECT *
+FROM bank_details
+WHERE account_number = $1;
+`;
+
 const addBankAccountByUserId = `
 INSERT INTO bank_details (account_number) 
 VALUES ($1)
@@ -20,6 +26,7 @@ VALUES ($1, $2)
 
 module.exports = {
   getBankAccountByUserId,
+  ifExistBankAccountByAccountNumber,
   addBankAccountByUserId,
   addSeller,
 };

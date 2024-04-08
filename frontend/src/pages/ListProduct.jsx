@@ -36,7 +36,7 @@ const ListProduct = () => {
   const [productDescription, setProductDescription] = useState("");
   const [inputs, setInputs] = useState([""]);
   const navigate = useNavigate();
-  const { hasBankAccount } = useCart();
+  const { hasAccount } = useCart();
 
   const handleAddInput = () => {
     setInputs([...inputs, ""]);
@@ -92,7 +92,7 @@ const ListProduct = () => {
   });
 
   useEffect(() => {
-    if (!hasBankAccount) {
+    if (!hasAccount) {
       navigate("/bank-account");
     }
   }, []);

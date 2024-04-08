@@ -7,7 +7,7 @@ import axios from "axios";
 
 function BankDetails() {
   const [bankAccountNumber, setBankAccountNumber] = useState("");
-  const { hasAccount } = useCart();
+  const { hasAccount, setHasAccount } = useCart();
   const navigate = useNavigate();
 
   const handleBankAccount = async () => {
@@ -25,6 +25,7 @@ function BankDetails() {
           headers,
         }
       );
+      setHasAccount(true);
     } catch (err) {
       console.log("Error -> ", err);
     }

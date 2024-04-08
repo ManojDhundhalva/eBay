@@ -27,15 +27,22 @@ const getBankAccount = async (req, resp) => {
 const addBankAccount = async (req, resp) => {
   if (req.user.role === "user") {
     try {
-      const result1 = await pool.query(queries.addBankAccountByUserId, [
-        req.body.bankAccountNumber,
-      ]);
+      const result1 = await pool.query(
+        queries.ifExistBankAccountByAccountNumber,
+        [req.body.bankAccountNumber]
+      );
 
-      const result2 = await pool.query(queries.addSeller, [
+      if (result1.rows.length === 0) {
+        const result2 = await pool.query(queries.addBankAccountByUserId, [
+          req.body.bankAccountNumber,
+        ]);
+      }
+
+      const result3 = await pool.query(queries.addSeller, [
         req.user.id,
         req.body.bankAccountNumber,
       ]);
-      
+
       resp.status(200).json({ message: "Bank Account Added" });
     } catch (err) {
       console.log("Error -> ", err);

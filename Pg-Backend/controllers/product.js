@@ -159,6 +159,75 @@ const getAllPurchasedProduct = async (req, resp) => {
   }
 };
 
+const updateReview = async (req, resp) => {
+  if (req.user.role === "user") {
+    try {
+      const result1 = await pool.query(queries.checkIfExistProductIdAndUserId, [
+        req.body.product_id,
+        req.user.id,
+      ]);
+
+      if (result1.rows.length !== 0) {
+        const result2 = await pool.query(queries.updateReview, [
+          req.body.rating,
+          req.body.product_id,
+          req.user.id,
+        ]);
+        resp.status(200).json({ message: "Rating Updated Succesfully" });
+      } else {
+        const result3 = await pool.query(queries.makeReview, [
+          req.body.product_id,
+          req.user.id,
+          req.body.rating,
+        ]);
+
+        resp.status(200).json({ message: "Rating Updated Succesfully" });
+      }
+    } catch (err) {
+      console.log("Error -> ", err);
+      resp.status(500).json({ message: "Internal Server Error" });
+    }
+  } else {
+    resp.status(404).json({
+      message: "You are not a user, therefore you update/make review",
+    });
+  }
+};
+
+const updateComment = async (req, resp) => {
+  if (req.user.role === "user") {
+    try {
+      const result1 = await pool.query(queries.checkIfExistProductIdAndUserId, [
+        req.body.product_id,
+        req.user.id,
+      ]);
+
+      if (result1.rows.length !== 0) {
+        const result2 = await pool.query(queries.updateComment, [
+          req.body.comment,
+          req.body.product_id,
+          req.user.id,
+        ]);
+        resp.status(200).json({ message: "Comment Updated Succesfully" });
+      } else {
+        const result3 = await pool.query(queries.makeComment, [
+          req.body.product_id,
+          req.user.id,
+          req.body.comment,
+        ]);
+        resp.status(200).json({ message: "Comment Updated Succesfully" });
+      }
+    } catch (err) {
+      console.log("Error -> ", err);
+      resp.status(500).json({ message: "Internal Server Error" });
+    }
+  } else {
+    resp.status(404).json({
+      message: "You are not a user, therefore you update/make review",
+    });
+  }
+};
+
 module.exports = {
   getAllProducts,
   viewProduct,
@@ -166,4 +235,6 @@ module.exports = {
   listProduct,
   getAllListedProduct,
   getAllPurchasedProduct,
+  updateReview,
+  updateComment,
 };

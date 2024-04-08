@@ -123,6 +123,69 @@ GROUP BY
 	o.order_id
 `;
 
+const checkIfExistProductIdAndUserId = `
+SELECT product_id, user_id 
+FROM product_review 
+WHERE
+    product_id = $1 AND user_id = $2
+`;
+
+const updateReview = `
+UPDATE product_review 
+SET product_review_rating = $1 
+WHERE 
+    product_id = $2 AND user_id = $3
+`;
+
+const makeReview = `
+INSERT INTO product_review (
+    product_id,
+    user_id,
+    product_review_rating
+) 
+VALUES ($1, $2, $3)
+`;
+
+const Trigger_updateProductRatingInProductTable = `
+CREATE OR REPLACE FUNCTION update_product_rating()
+RETURNS TRIGGER AS $$
+BEGIN
+    UPDATE product
+    SET product_rating = (
+        SELECT AVG(product_review_rating)
+        FROM product_review
+        WHERE product_review.product_id = NEW.product_id
+            AND product_review_rating IS NOT NULL
+        GROUP BY product_review.product_id
+    )
+    WHERE product_id = NEW.product_id;
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER avg_rating_trigger
+AFTER INSERT OR UPDATE OF product_review_rating ON product_review
+FOR EACH ROW
+EXECUTE FUNCTION update_product_rating();
+
+`;
+
+const updateComment = `
+UPDATE product_review 
+SET product_review_comment = $1 
+WHERE 
+    product_id = $2 AND user_id = $3
+`;
+
+const makeComment = `
+INSERT INTO product_review (
+    product_id,
+    user_id,
+    product_review_comment
+) 
+VALUES ($1, $2, $3)
+`;
+
 module.exports = {
   getAllProduct,
   viewProduct,
@@ -134,4 +197,9 @@ module.exports = {
   listImageIntoImageTableByUniqueId,
   getAllListedProductBySellerId,
   getAllPurchasedProductByUserId,
+  updateReview,
+  checkIfExistProductIdAndUserId,
+  makeReview,
+  updateComment,
+  makeComment,
 };

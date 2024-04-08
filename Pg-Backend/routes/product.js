@@ -10,5 +10,7 @@ router.post("/increase-view-count", verifyTokenAndAuthorization, controller.incr
 router.post("/list-product", verifyTokenAndAuthorization, controller.listProduct);
 router.get("/all-listed-product", verifyTokenAndAuthorization, controller.getAllListedProduct);
 router.get("/all-purchased-product", verifyTokenAndAuthorization, controller.getAllPurchasedProduct);
+router.post("/review-product", verifyTokenAndAuthorization, controller.updateReview);
+router.post("/comment-product", verifyTokenAndAuthorization, controller.updateComment);
 
 module.exports = router;
