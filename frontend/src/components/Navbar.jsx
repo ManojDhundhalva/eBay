@@ -101,6 +101,29 @@ function Navbar() {
                 AboutUS
               </Link>
             </Button>
+            {window.localStorage.getItem("role") === "manager" && (
+              <>
+                <Button
+                  disableRipple
+                  variant="text"
+                  style={{ transition: "all 0.5s ease" }}
+                  sx={{
+                    "&:hover": {
+                      borderBottom: "1px solid #03045e",
+                      borderRadius: "5px",
+                    },
+                  }}
+                >
+                  <Link
+                    className="nav-link active"
+                    to="/queue"
+                    style={{ fontFamily: "Quicksand" }}
+                  >
+                    Queue
+                  </Link>
+                </Button>
+              </>
+            )}
             {window.localStorage.getItem("role") === "user" && (
               <>
                 <Button

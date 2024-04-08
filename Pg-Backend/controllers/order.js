@@ -15,6 +15,8 @@ const putOrder = async (req, resp) => {
       order_shipping_address_pincode,
       order_shipping_address_mobile_number,
       productIds,
+      estimated_delivery_date,
+      shipping_status,
     } = req.body;
 
     const payment_transaction_unique_id = uuidv4();
@@ -70,6 +72,12 @@ const putOrder = async (req, resp) => {
     }
 
     const result6 = await pool.query(queries.emptyCart, [req.user.id]);
+
+    const result7 = await pool.query(queries.makeShippingStatus, [
+      order_id,
+      estimated_delivery_date,
+      shipping_status,
+    ]);
 
     resp.status(200).json({ message: "Ordered Succesfully" });
   } else {

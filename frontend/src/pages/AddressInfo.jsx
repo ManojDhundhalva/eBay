@@ -47,12 +47,14 @@ function AddressInfo() {
           order_shipping_address_pincode: pincode,
           order_shipping_address_mobile_number: phoneNumber,
           productIds,
+          estimated_delivery_date: "2000-01-01",
+          shipping_status: "order placed",
         },
         {
           headers,
         }
       );
-      // console.log(results);
+      cart.splice(0, cart.length);
       navigate("/");
     } catch (err) {
       console.log("Error -> ", err);

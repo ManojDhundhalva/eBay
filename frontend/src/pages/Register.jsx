@@ -240,9 +240,9 @@ export default function Register() {
                 </MenuItem>
                 <MenuItem
                   style={{ fontFamily: "Quicksand", fontWeight: "bold" }}
-                  value="managar"
+                  value="manager"
                 >
-                  Managar
+                  Manager
                 </MenuItem>
                 <MenuItem
                   style={{ fontFamily: "Quicksand", fontWeight: "bold" }}

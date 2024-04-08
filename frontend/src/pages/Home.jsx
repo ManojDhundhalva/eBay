@@ -9,6 +9,8 @@ import Agency from "../components/Agency";
 import Searchnearby from "../components/Searchnearby";
 import { useAuth } from "../context/auth";
 import User from "./User";
+import InventoryManager from "./InventoryManager";
+import Shipper from "./Shipper";
 
 export default function Home() {
   const { validateUser } = useAuth();
@@ -21,6 +23,10 @@ export default function Home() {
     <>
       <div>Home</div>
       {window.localStorage.getItem("role") === "user" && <User />}
+      {window.localStorage.getItem("role") === "manager" && (
+        <InventoryManager />
+      )}
+      {window.localStorage.getItem("role") === "shipper" && <Shipper />}
     </>
   );
 }

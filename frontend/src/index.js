@@ -6,18 +6,24 @@ import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter } from "react-router-dom";
 import { AuthProvider } from "./context/auth";
 import { CartProvider } from "./context/cart";
-import { ProductProvider } from "./context/product";
+import { InventoryProvider } from "./context/inventory";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <BrowserRouter>
       <AuthProvider>
-        <CartProvider>
-          <ProductProvider />
-          <App />
-          <ProductProvider />
-        </CartProvider>
+        {window.localStorage.getItem("role") === "user" && (
+          <CartProvider>
+            <App />
+          </CartProvider>
+        )}
+        {window.localStorage.getItem("role") === "manager" && (
+          <InventoryProvider>
+            <App />
+          </InventoryProvider>
+        )}
+        {window.localStorage.getItem("role") === "shipper" && <App />}
       </AuthProvider>
     </BrowserRouter>
   </React.StrictMode>

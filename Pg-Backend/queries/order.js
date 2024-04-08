@@ -49,6 +49,16 @@ DELETE FROM cart
 WHERE user_id = $1
 `;
 
+const makeShippingStatus = `
+INSERT INTO shipping_status (
+    order_id,
+    estimated_delivery_date, 
+    shipping_status, 
+    shipping_status_one
+)
+VALUES ($1, $2, $3, CURRENT_TIMESTAMP);
+`;
+
 module.exports = {
   addPayment,
   getPaymentTransactionId,
@@ -56,4 +66,5 @@ module.exports = {
   findOrderId,
   addTableOfHasOrder,
   emptyCart,
+  makeShippingStatus,
 };
