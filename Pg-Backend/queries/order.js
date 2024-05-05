@@ -21,8 +21,8 @@ INSERT INTO order_details (
     order_shipping_address_apartment, 
     order_shipping_address_street, 
     order_shipping_address_country, 
-    order_shipping_address_city, 
     order_shipping_address_state, 
+    order_shipping_address_city, 
     order_shipping_address_pincode, 
     order_shipping_address_mobile_number
 ) 

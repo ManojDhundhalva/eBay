@@ -22,6 +22,7 @@ function InventoryManager() {
           headers,
         }
       );
+      console.log(results.data);
       setAllProduct(results.data);
     } catch (err) {
       console.log("Error -> ", err);

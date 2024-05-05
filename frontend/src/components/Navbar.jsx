@@ -122,6 +122,25 @@ function Navbar() {
                     Queue
                   </Link>
                 </Button>
+                <Button
+                  disableRipple
+                  variant="text"
+                  style={{ transition: "all 0.5s ease" }}
+                  sx={{
+                    "&:hover": {
+                      borderBottom: "1px solid #03045e",
+                      borderRadius: "5px",
+                    },
+                  }}
+                >
+                  <Link
+                    className="nav-link active"
+                    to="/received-product"
+                    style={{ fontFamily: "Quicksand" }}
+                  >
+                    Revied Product
+                  </Link>
+                </Button>
               </>
             )}
             {window.localStorage.getItem("role") === "user" && (

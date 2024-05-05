@@ -15,6 +15,7 @@ import ListProduct from "./pages/ListProduct";
 import AddressInfo from "./pages/AddressInfo";
 import BankDetails from "./pages/BankDetails";
 import InventoryQueue from "./pages/InventoryQueue";
+import ReceivedProduct from "./pages/ReceivedProduct";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -39,6 +40,7 @@ function App() {
         <Route exact path="/address-info" element={<AddressInfo />} />
         <Route exact path="/bank-account" element={<BankDetails />} />
         <Route exact path="/queue" element={<InventoryQueue />} />
+        <Route exact path="/received-product" element={<ReceivedProduct />} />
       </Routes>
       <Footer />
     </>

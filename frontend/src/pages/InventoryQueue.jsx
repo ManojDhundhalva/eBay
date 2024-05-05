@@ -22,7 +22,8 @@ function InventoryQueue() {
           headers,
         }
       );
-      setAllQueue(results.data);
+      console.log(results.data);
+      // setAllQueue(results.data);
     } catch (err) {
       console.log("Error -> ", err);
     }
@@ -34,7 +35,7 @@ function InventoryQueue() {
   return (
     <>
       <h1>InventoryQueue</h1>
-      <Grid container spacing={2}>
+      {/* <Grid container spacing={2}>
         {allQueue.map((data, index) =>
           Object.entries(data).map(([key, value]) => (
             <Grid key={`${index}-${key}`} xs={12} sm={6} md={4} lg={3} item>
@@ -44,7 +45,7 @@ function InventoryQueue() {
             </Grid>
           ))
         )}
-      </Grid>
+      </Grid> */}
     </>
   );
 }
